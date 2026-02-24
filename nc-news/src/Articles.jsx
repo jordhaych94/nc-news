@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Articles() {
   const [articles, setArticles] = useState([]);
@@ -15,18 +16,22 @@ function Articles() {
       .catch((error) => console.error("Error:", error));
   }, []);
 
-  if (isLoading) return <div class="loader"></div>;
+  if (isLoading) return <div className="loader"></div>;
 
   return (
     <>
-      <div className="article-grid">
+      <div className="display-grid">
         {articles.map((article) => (
           <div key={article.article_id} className="article-card">
-            <img src={article.article_img_url} alt={article.title} />
-            <h3>{article.title}</h3>
-            <p>Author: {article.author}</p>
-            <p>Votes: {article.votes}</p>
-            <p>Comments: {article.comment_count}</p>
+            <Link to="/articles/:article_id">
+              <img src={article.article_img_url} alt={article.title} />
+              <h3>{article.title}</h3>{" "}
+            </Link>
+            <div className="article-info">
+              <p>Author: {article.author}</p>
+              <p>Votes: {article.votes}</p>
+              <p>Comments: {article.comment_count}</p>
+            </div>
           </div>
         ))}
       </div>

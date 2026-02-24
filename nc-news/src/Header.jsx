@@ -8,7 +8,6 @@ function Header() {
       .then((response) => response.json())
       .then((data) => {
         setUser(data.users);
-        console.log(data.users);
       })
       .catch((error) => console.error("Error:", error));
   }, []);

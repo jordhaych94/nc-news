@@ -1,15 +1,21 @@
-import { useState } from "react";
 import "./App.css";
-import Header from "./Header";
+import Home from "./Home";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
-import Articles from "./Articles";
+import Header from "./Header";
+import Topics from "./Topics";
+import ArticleCard from "./Article-card";
 
 function App() {
   return (
     <>
       <Header />
       <Navbar />
-      <Articles />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/articles/:article_id" element={<ArticleCard />} />
+        <Route path="/topics" element={<Topics />} />
+      </Routes>
     </>
   );
 }
