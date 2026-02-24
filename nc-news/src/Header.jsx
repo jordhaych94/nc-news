@@ -13,7 +13,13 @@ function Header() {
       .catch((error) => console.error("Error:", error));
   }, []);
 
-  if (!user) return;
+  if (!user)
+    return (
+      <header className="header">
+        <img className="logo" src="./public/news.svg" alt="nc news logo" />
+        <h1>NC NEWS</h1>{" "}
+      </header>
+    );
 
   return (
     <header className="header">
