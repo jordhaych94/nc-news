@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Topics() {
   const [topics, setTopics] = useState([]);
@@ -21,8 +22,10 @@ function Topics() {
       <div className="display-grid">
         {topics.map((topic) => (
           <div key={topic.slug} className="topic-card">
-            <img src={topic.img_url} alt="{topic.description}" />
-            <h3>{topic.slug}</h3>
+            <Link to="">
+              <img src={topic.img_url} alt="{topic.description}" />
+              <h3>{topic.slug}</h3>
+            </Link>
             <p>Description: {topic.description}</p>
           </div>
         ))}

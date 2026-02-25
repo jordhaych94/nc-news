@@ -15,14 +15,14 @@ function Header() {
   if (!user)
     return (
       <header className="header">
-        <img className="logo" src="./public/news.svg" alt="nc news logo" />
+        <img className="logo" src="/news.svg" alt="nc news logo" />
         <h1>NC NEWS</h1>{" "}
       </header>
     );
 
   return (
     <header className="header">
-      <img className="logo" src="./public/news.svg" alt="nc news logo" />
+      <img className="logo" src="/news.svg" alt="nc news logo" />
       <h1>NC NEWS</h1>
       <div>
         <img
