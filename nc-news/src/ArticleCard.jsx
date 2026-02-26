@@ -24,7 +24,7 @@ function ArticleCard() {
 
   if (isLoading) return <div className="loader"></div>;
 
-  function handleVotes() {
+  function handleUpVotes() {
     console.log("button clicked");
 
     if (vote === 0) {
@@ -56,6 +56,38 @@ function ArticleCard() {
     }
   }
 
+  function handleDownVotes() {
+    console.log("button clicked");
+
+    if (vote === 0) {
+      setVote(-1);
+      fetch(
+        `https://nc-news-backend-xadn.onrender.com/api/articles/${article_id}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ inc_votes: -1 }),
+        },
+      ).catch((error) => {
+        console.error("Error:", error);
+        setVote(0);
+      });
+    } else {
+      setVote(0);
+      fetch(
+        `https://nc-news-backend-xadn.onrender.com/api/articles/${article_id}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ inc_votes: +1 }),
+        },
+      ).catch((error) => {
+        console.error("Error:", error);
+        setVote(1);
+      });
+    }
+  }
+
   return (
     <>
       <div className="article-card">
@@ -66,17 +98,24 @@ function ArticleCard() {
           {article[0].created_at}
         </p>
         <h4>{article[0].body}</h4>
-        <p>
-          Votes: {article[0].votes + vote}{" "}
+        <span>
           <button
             onClick={() => {
-              handleVotes();
+              handleUpVotes();
             }}
           >
             upvote
           </button>{" "}
-          Comments: {}
-        </p>
+          Votes: {article[0].votes + vote}{" "}
+          <button
+            onClick={() => {
+              handleDownVotes();
+            }}
+          >
+            downvote
+          </button>
+        </span>{" "}
+        Comments: {}
       </div>
       <div>
         <Comments />
