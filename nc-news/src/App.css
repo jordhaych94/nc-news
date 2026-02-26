@@ -97,3 +97,6 @@
   height: auto;
 }
 
+.vote-btn {
+  cursor: pointer;
+}

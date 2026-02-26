@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { BiUpvote } from "react-icons/bi";
+import { BiDownvote } from "react-icons/bi";
 
 function Comments() {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [newComment, setNewComment] = useState("");
+  const [vote, setVote] = useState(0);
 
   const { article_id } = useParams();
 
@@ -40,7 +43,14 @@ function Comments() {
           body: newComment,
         }),
       },
-    );
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        const updatedComents = [data.comment, ...comments];
+        setComments(updatedComents);
+        setNewComment("");
+      });
   }
 
   return (
@@ -61,7 +71,8 @@ function Comments() {
             <p>author: {comment.author}</p>
             <p>{comment.created_at}</p>
             <p>{comment.body}</p>
-            <p>Votes: {comment.votes}</p>
+            <BiUpvote />
+            {comment.votes} <BiDownvote />
             <hr />
           </div>
         ))}

@@ -101,15 +101,21 @@ function ArticleCard() {
           {article[0].created_at}
         </p>
         <h4>{article[0].body}</h4>
-         <BiUpvote onClick={() => {
-              handleUpVotes();
-            }}/>{" "}
-          {article[0].votes + vote}{" "}
-          <BiDownvote onClick={() => {
-              handleDownVotes();
-            }}/>
-        <br/>
-        <FaCommentDots /> {}
+        <BiUpvote
+          className="vote-btn"
+          onClick={() => {
+            handleUpVotes();
+          }}
+        />{" "}
+        {article[0].votes + vote}{" "}
+        <BiDownvote
+          className="vote-btn"
+          onClick={() => {
+            handleDownVotes();
+          }}
+        />
+        <br />
+        <FaCommentDots /> {article[0].comment_count}
       </div>
       <div>
         <Comments />
