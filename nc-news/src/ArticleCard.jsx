@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Comments from "./comments";
+import { BiUpvote } from "react-icons/bi";
+import { BiDownvote } from "react-icons/bi";
+import { FaCommentDots } from "react-icons/fa";
 
 function ArticleCard() {
   const [article, setArticle] = useState([]);
@@ -98,24 +101,15 @@ function ArticleCard() {
           {article[0].created_at}
         </p>
         <h4>{article[0].body}</h4>
-        <span>
-          <button
-            onClick={() => {
+         <BiUpvote onClick={() => {
               handleUpVotes();
-            }}
-          >
-            upvote
-          </button>{" "}
-          Votes: {article[0].votes + vote}{" "}
-          <button
-            onClick={() => {
+            }}/>{" "}
+          {article[0].votes + vote}{" "}
+          <BiDownvote onClick={() => {
               handleDownVotes();
-            }}
-          >
-            downvote
-          </button>
-        </span>{" "}
-        Comments: {}
+            }}/>
+        <br/>
+        <FaCommentDots /> {}
       </div>
       <div>
         <Comments />

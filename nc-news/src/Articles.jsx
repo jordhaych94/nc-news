@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FaCommentDots } from "react-icons/fa";
 
 function Articles() {
   const [articles, setArticles] = useState([]);
@@ -31,7 +32,7 @@ function Articles() {
               <hr />
               <p>Author: {article.author}</p>
               <p>Votes: {article.votes}</p>
-              <p>Comments: {article.comment_count}</p>
+              <FaCommentDots /> {article.comment_count}
             </div>
           </div>
         ))}
