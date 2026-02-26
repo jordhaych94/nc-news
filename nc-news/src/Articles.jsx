@@ -11,6 +11,7 @@ function Articles() {
       .then((data) => {
         setIsLoading(false);
         setArticles(data.articles);
+        console.log(data);
       })
       .catch((error) => console.error("Error:", error));
   }, []);
@@ -27,7 +28,7 @@ function Articles() {
               <h3>{article.title}</h3>
             </Link>
             <div className="article-info">
-              <hr/>
+              <hr />
               <p>Author: {article.author}</p>
               <p>Votes: {article.votes}</p>
               <p>Comments: {article.comment_count}</p>

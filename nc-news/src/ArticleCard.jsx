@@ -5,6 +5,7 @@ import Comments from "./comments";
 function ArticleCard() {
   const [article, setArticle] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [vote, setVote] = useState(0);
 
   const { article_id } = useParams();
 
@@ -16,23 +17,65 @@ function ArticleCard() {
       .then((data) => {
         setIsLoading(false);
         setArticle(data.articles);
+        console.log(data.articles);
       })
       .catch((error) => console.error("Error:", error));
   }, [article_id]);
 
   if (isLoading) return <div className="loader"></div>;
 
+  function handleVotes() {
+    console.log("button clicked");
+
+    if (vote === 0) {
+      setVote(1);
+      fetch(
+        `https://nc-news-backend-xadn.onrender.com/api/articles/${article_id}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ inc_votes: 1 }),
+        },
+      ).catch((error) => {
+        console.error("Error:", error);
+        setVote(0);
+      });
+    } else {
+      setVote(0);
+      fetch(
+        `https://nc-news-backend-xadn.onrender.com/api/articles/${article_id}`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ inc_votes: -1 }),
+        },
+      ).catch((error) => {
+        console.error("Error:", error);
+        setVote(1);
+      });
+    }
+  }
+
   return (
     <>
       <div className="article-card">
+        <h1>{article[0].title}</h1>
         <img src={article[0].article_img_url} alt={article.title} />
         <p>
-          Author: {article[0].author} | Topic: {article[0].topic} | Created at:{" "}
+          {article[0].author} | Topic: {article[0].topic} | Created at:{" "}
           {article[0].created_at}
         </p>
-        <h3>{article[0].body}</h3>
+        <h4>{article[0].body}</h4>
         <p>
-          Votes: {article[0].votes} <button>upvote</button> | Comments: {}
+          Votes: {article[0].votes + vote}{" "}
+          <button
+            onClick={() => {
+              handleVotes();
+            }}
+          >
+            upvote
+          </button>{" "}
+          Comments: {}
         </p>
       </div>
       <div>
