@@ -68,7 +68,7 @@ function Comments() {
 
         {comments.map((comment) => (
           <div key={comment.comment_id}>
-            <p>author: {comment.author}</p>
+            <p>{comment.author}</p>
             <p>{comment.created_at}</p>
             <p>{comment.body}</p>
             <BiUpvote />
@@ -76,6 +76,9 @@ function Comments() {
             <hr />
           </div>
         ))}
+        if({comments.author === 'grumpy19'}) {
+          <button></button>
+        }
       </section>
     </>
   );

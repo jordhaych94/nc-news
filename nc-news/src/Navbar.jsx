@@ -7,9 +7,9 @@ function Navbar() {
         <Link to="/" className="links">
           Home
         </Link>
-        <Link to="/articles/:article_id" className="links">
+        {/* <Link to="/articles/:article_id" className="links">
           Article
-        </Link>
+        </Link> */}
         <Link to="/topics" className="links">
           Topics
         </Link>
