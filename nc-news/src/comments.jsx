@@ -82,9 +82,9 @@ function Comments() {
         <form onSubmit={handleSubmit}>
           <label>
             Post a comment:
-            <input type="text" value={newComment} onChange={handleChange} />
+            <input type="text" value={newComment} onChange={handleChange} placeholder="Whats on you're mind?" />
           </label>
-          <input type="submit" />
+          <input disabled={newComment.length === 0} type="submit" />
         </form>
         <hr />
 

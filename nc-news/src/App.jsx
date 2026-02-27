@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import Header from "./Header";
 import Topics from "./Topics";
 import ArticleCard from "./ArticleCard";
+import Error404 from "./Error404";
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/articles/:article_id" element={<ArticleCard  />} />
+        <Route path="/articles/:article_id" element={<ArticleCard />} />
         <Route path="/topics" element={<Topics />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </>
   );
