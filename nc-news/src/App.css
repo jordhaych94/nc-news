@@ -100,3 +100,11 @@
 .vote-btn {
   cursor: pointer;
 }
+
+.delete-btn {
+  cursor: pointer;
+  color: red;
+  position: absolute;
+  right: 0;
+  display: inline;
+}

@@ -8,7 +8,7 @@ function Comments() {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [newComment, setNewComment] = useState("");
-  const [vote, setVote] = useState(0);
+  // const [vote, setVote] = useState(0);  feature coming soon!
 
   const { article_id } = useParams();
 
@@ -54,6 +54,26 @@ function Comments() {
       });
   }
 
+  function handleDelete(comment_id) {
+    fetch(
+      `https://nc-news-backend-xadn.onrender.com/api/comments/${comment_id}`,
+      {
+        method: "DELETE",
+      },
+    )
+      .then((response) => {
+        if (response.status === 204) {
+          const updatedComments = comments.filter((comment) => {
+            return comment.comment_id !== comment_id;
+          });
+          setComments(updatedComments);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
   return (
     <>
       <section>
@@ -66,7 +86,7 @@ function Comments() {
           <input type="submit" />
         </form>
         <hr />
-        
+
         {comments.map((comment) => (
           <div key={comment.comment_id}>
             <p>{comment.author}</p>
@@ -74,7 +94,15 @@ function Comments() {
             <p>{comment.body} </p>
             <BiUpvote />
             {comment.votes} <BiDownvote />
-            {comment.author === "grumpy19" ? <MdDeleteOutline /> : <></>}
+            <div className="delete-btn">{comment.author === "grumpy19" ? (
+              <MdDeleteOutline size={'25px'}
+                onClick={() => {
+                  handleDelete(comment.comment_id);
+                }}
+              />
+            ) : (
+              <></>
+            )}</div>
             <hr />
           </div>
         ))}
