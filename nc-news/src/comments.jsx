@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { BiUpvote } from "react-icons/bi";
 import { BiDownvote } from "react-icons/bi";
+import { MdDeleteOutline } from "react-icons/md";
 
 function Comments() {
   const [comments, setComments] = useState([]);
@@ -65,20 +66,18 @@ function Comments() {
           <input type="submit" />
         </form>
         <hr />
-
+        
         {comments.map((comment) => (
           <div key={comment.comment_id}>
             <p>{comment.author}</p>
             <p>{comment.created_at}</p>
-            <p>{comment.body}</p>
+            <p>{comment.body} </p>
             <BiUpvote />
             {comment.votes} <BiDownvote />
+            {comment.author === "grumpy19" ? <MdDeleteOutline /> : <></>}
             <hr />
           </div>
         ))}
-        if({comments.author === 'grumpy19'}) {
-          <button></button>
-        }
       </section>
     </>
   );
