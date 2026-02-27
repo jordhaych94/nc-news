@@ -29,6 +29,7 @@ function Comments() {
 
   function handleChange(e) {
     setNewComment(e.target.value);
+    console.log(e.target.value);
   }
 
   function handleSubmit(e) {
@@ -94,15 +95,18 @@ function Comments() {
             <p>{comment.body} </p>
             <BiUpvote />
             {comment.votes} <BiDownvote />
-            <div className="delete-btn">{comment.author === "grumpy19" ? (
-              <MdDeleteOutline size={'25px'}
-                onClick={() => {
-                  handleDelete(comment.comment_id);
-                }}
-              />
-            ) : (
-              <></>
-            )}</div>
+            <div className="delete-btn">
+              {comment.author === "grumpy19" ? (
+                <MdDeleteOutline
+                  size={"25px"}
+                  onClick={() => {
+                    handleDelete(comment.comment_id);
+                  }}
+                />
+              ) : (
+                <></>
+              )}
+            </div>
             <hr />
           </div>
         ))}
